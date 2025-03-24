@@ -94,7 +94,7 @@ class NamazTime:
 
 
     def __set_timezone(self):
-        with open("utils/timezone_city.json", "r", encoding="utf-8") as file:
+        with open("api/timezone_city.json", "r", encoding="utf-8") as file:
             timezones = json.load(file)
 
         for timezone in timezones.get("timezones"):
