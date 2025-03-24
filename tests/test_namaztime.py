@@ -1,5 +1,5 @@
 import pytest
-from api import NamazTime
+from namaztime import NamazTime
 
 def test_namaz_time_today():
     namaz = NamazTime(city="Tashkent")

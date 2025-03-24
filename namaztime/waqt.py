@@ -1,3 +1,5 @@
+import os
+
 import requests
 
 import json
@@ -6,16 +8,6 @@ import datetime
 
 class NamazTime:
     """
-    NamazTime class provides functionalities to retrieve Islamic prayer times
-    for a given city. It fetches prayer timings from the Aladhan API and supports
-    daily and weekly schedules.
-
-    Attributes:
-        city (str): The name of the city for which prayer times are required.
-        school (int): The fiqh school (1 for Shafi'i, 2 for Hanafi). Default is 1.
-        timezone (str): The timezone of the requested city. Default is "UTC".
-        method (int): Calculation method for prayer times. Default is 3.
-
     Methods:
         today(): Returns prayer times for the current day.
         weekly(): Returns prayer times for the next 7 days.
@@ -67,9 +59,8 @@ class NamazTime:
         start_str = start_date.strftime("%d-%m-%Y")
         end_str = end_date.strftime("%d-%m-%Y")
 
-        print(f"\n start date - {start_str}, end date - {end_str}\n")
 
-        set_timezone = self.set_timezone()
+        set_timezone = self.__set_timezone()
         url = (
             f"https://api.aladhan.com/v1/calendarByAddress?address={self.city}"
             f"&method={self.method}&school={self.school}&timezonestring={self.timezone}"
@@ -94,7 +85,10 @@ class NamazTime:
 
 
     def __set_timezone(self):
-        with open("api/timezone_city.json", "r", encoding="utf-8") as file:
+        BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+        json_path = os.path.join(BASE_DIR, "timezone_city.json")
+
+        with open(json_path, "r", encoding="utf-8") as file:
             timezones = json.load(file)
 
         for timezone in timezones.get("timezones"):
@@ -117,7 +111,6 @@ class NamazTime:
 
 
     def __get_namaz_time(self, date):
-        print('date;', date)
         self.__set_timezone()
         url = (
             f"https://api.aladhan.com/v1/timingsByAddress/{date}"
