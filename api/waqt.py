@@ -19,11 +19,13 @@ class NamazTime:
     Methods:
         today(): Returns prayer times for the current day.
         weekly(): Returns prayer times for the next 7 days.
-        calculate_namaz_periods(data, timings): Formats and structures prayer times.
+        get_special_date(date): Returns prayer times for a specific date.
     """
     def __init__(self, city, school=1, timezone="UTC", method=3):
         """
-        Initializes the NamazTime class with the given city and calculation settings.
+        NamazTime class provides functionalities to retrieve Islamic prayer times
+        for a given city. It fetches prayer timings from the Aladhan API and supports
+        daily and weekly schedules.
 
         Args:
             city (str): The city name for which prayer times are needed.
@@ -91,7 +93,7 @@ class NamazTime:
         return weekly_times
 
 
-    def set_timezone(self):
+    def __set_timezone(self):
         with open("utils/timezone_city.json", "r", encoding="utf-8") as file:
             timezones = json.load(file)
 
@@ -101,9 +103,22 @@ class NamazTime:
                 return timezone
         return 'UTC'
 
+    def get_special_date(self, date):
+        """
+        Retrieves prayer times for a specific date.
+
+        Args:
+            date (str): The date in "dd-mm-yyyy" format.
+
+        Returns:
+            dict: Prayer times and related information.
+        """
+        return self.__get_namaz_time(date)
+
 
     def __get_namaz_time(self, date):
-        self.set_timezone()
+        print('date;', date)
+        self.__set_timezone()
         url = (
             f"https://api.aladhan.com/v1/timingsByAddress/{date}"
             f"?address={self.city}&method={self.method}&shafaq=general"

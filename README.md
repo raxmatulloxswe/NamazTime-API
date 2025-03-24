@@ -17,9 +17,10 @@ pip install namaztime
 ```
 from namaztime import NamazTime as namaztime
 
-namaz = namaztime("Tashkent")
-print(namaz.today())  # Get today's prayer times
-print(namaz.weekly())  # Get weekly prayer times
+praytimes = namaztime("Tashkent")
+print(praytimes.today())  # Get today's prayer times
+print(praytimes.weekly())  # Get weekly prayer times
+print(praytimes.get_special_date("21-03-2025" <- example))  # Get prayer times for a specific date
 ```
 
 
@@ -46,9 +47,10 @@ pip install namaztime
 ```
 from namaztime import NamazTime
 
-namoz = NamazTime("Toshkent")
-print(namoz.today())  # Bugungi namoz vaqtlarini olish
-print(namoz.weekly())  # Haftalik namoz vaqtlarini olish
+praytimes = NamazTime("Toshkent")
+print(praytimes.today())  # Bugungi namoz vaqtlarini olish
+print(praytimes.weekly())  # Haftalik namoz vaqtlarini olish
+print(praytimes.get_special_date("25-03-2025" <- misol)) # Belgilangan sana uchun namoz vaqtlarini olish
 ```
 
 # 🕌 NamazTime  
@@ -69,9 +71,10 @@ pip install namaztime
 
 ```pythonfrom namaztime import NamazTime
 
-namaz = NamazTime("Ташкент")
-print(namaz.today())  # Получить время намаза на сегодня
-print(namaz.weekly())  # Получить расписание намазов на неделю
+praytimes = NamazTime("Ташкент")
+print(praytimes.today())  # Получить время намаза на сегодня
+print(praytimes.weekly())  # Получить расписание намазов на неделю
+print(praytimes.get_special_date("25-03-2025" <- пример))  # Получить время намаза на определенную дату
 ```
 
 
